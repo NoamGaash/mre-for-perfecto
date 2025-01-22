@@ -29,33 +29,36 @@ exports.config = {
     maxInstances: 1,
 
     capabilities: [{
-        securityToken: securityToken,
-        automationName: 'Appium',
-        // 3. Set device capabilities.
+        'perfecto:options': {
+            securityToken: securityToken,
+            automationName: 'Appium',
+        
+            // 3. Set device capabilities.
             'platformName': 'iOS',
             'platformVersion': '17.3.1',
-            'platformBuild': '21D61',
+            // 'platformBuild': '21D61',
             'location': 'NA-US-BOS',
             'resolution': '828x1792',
             'accountName': 'dev1',
-            'deviceStatus': 'OPEN',
-            'manufacturer': 'Apple',
+            // 'deviceStatus': 'OPEN',
+            // 'manufacturer': 'Apple',
             'model': 'iPhone-11',
         
 
-        // 4. Set Perfecto Media repository path of App under test.
-        app: 'PUBLIC:InvoiceApp1.0.ipa',
+            // 4. Set Perfecto Media repository path of App under test.
+            app: 'PUBLIC:InvoiceApp1.0.ipa',
 
-        // 5. Set the unique identifier of your app
-        bundleId: 'io.perfecto.expense.tracker',
-        appiumVersion: '1.20.2',
-        autoLaunch: true, // Whether to have Appium install and launch the app automatically.
-        iOSResign: true, // To work with hybrid applications, install the iOS/Android application as instrumented.
+            // 5. Set the unique identifier of your app
+            bundleId: 'io.perfecto.expense.tracker',
+            appiumVersion: '1.20.2',
+            autoLaunch: true, // Whether to have Appium install and launch the app automatically.
+            iOSResign: true, // To work with hybrid applications, install the iOS/Android application as instrumented.
+            takesScreenshot: false,
+            screenshotOnError: true,
+            openDeviceTimeout: 5
+        },
         // fullReset: false, // Reset app state by uninstalling app
         browserName: '',
-        takesScreenshot: false,
-        screenshotOnError: true,
-        openDeviceTimeout: 5
     }, ],
     // Default timeout for all waitFor* commands.
     waitforTimeout: 30000,
