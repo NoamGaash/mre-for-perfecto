@@ -1,0 +1,22 @@
+on:
+    push:
+        branches:
+            - **
+
+jobs:
+    test:
+        runs-on: ubuntu-latest
+        steps:
+            - uses: actions/checkout@v2
+            - name: Set Up Node.js
+              uses: actions/setup-node@v1
+              with:
+                  node-version: 20
+            - name: Install Dependencies
+              working-directory: Appium/Native/Javascript/wdio/ios/
+              run: npm install
+            - name: Run Tests
+              env:
+                PERFECTO_SEC_TOKEN: ${{ secrets.PERFECTO_SEC_TOKEN }}
+              working-directory: Appium/Native/Javascript/wdio/ios/
+              run: npm run ios

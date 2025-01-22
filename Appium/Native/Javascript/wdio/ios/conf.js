@@ -2,9 +2,9 @@ const path = require('path');
 const Reporting = require('perfecto-reporting');
 var reportingClient;
 //1. Replace <<cloud name>> with your perfecto cloud name (e.g. demo is the cloudName of demo.perfectomobile.com).
-var host = '<<cloud name>>';
+var host = 'trial';
 //   2. Replace <<security token>> with your perfecto security token.
-var securityToken = '<<security token>>';
+var securityToken = process.env.PERFECTO_SEC_TOKEN;
 
 host = process.env.HOST == null ? host : process.env.HOST;
 securityToken = process.env.SECURITY_TOKEN == null ? securityToken : process.env.SECURITY_TOKEN;
@@ -32,10 +32,19 @@ exports.config = {
         securityToken: securityToken,
         automationName: 'Appium',
         // 3. Set device capabilities.
-        platformName: 'iOS',
-        model: 'iPhone.*',
+            'platformName': 'iOS',
+            'platformVersion': '17.3.1',
+            'platformBuild': '21D61',
+            'location': 'NA-US-BOS',
+            'resolution': '828x1792',
+            'accountName': 'dev1',
+            'deviceStatus': 'OPEN',
+            'manufacturer': 'Apple',
+            'model': 'iPhone-11',
+        
+
         // 4. Set Perfecto Media repository path of App under test.
-        app: 'PUBLIC:ExpenseTracker/Native/iOS/InvoiceApp1.0.ipa',
+        app: 'PUBLIC:InvoiceApp1.0.ipa',
 
         // 5. Set the unique identifier of your app
         bundleId: 'io.perfecto.expense.tracker',
