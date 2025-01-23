@@ -2,9 +2,9 @@ const path = require('path');
 const Reporting = require('perfecto-reporting');
 var reportingClient;
 //1. Replace <<cloud name>> with your perfecto cloud name (e.g. demo is the cloudName of demo.perfectomobile.com).
-var host = '<<cloud name>>';
+var host = 'trial';
 //   2. Replace <<security token>> with your perfecto security token.
-var securityToken = '<<security token>>';
+var securityToken = process.env.PERFECTO_SEC_TOKEN;
 
 host = process.env.HOST == null ? host : process.env.HOST;
 securityToken = process.env.SECURITY_TOKEN == null ? securityToken : process.env.SECURITY_TOKEN;
@@ -29,24 +29,21 @@ exports.config = {
     maxInstances: 1,
 
     capabilities: [{
-        securityToken: securityToken,
-        automationName: 'Appium',
-        // 3. Set device capabilities.
-        platformName: 'iOS',
-        model: 'iPhone.*',
-        // 4. Set Perfecto Media repository path of App under test.
-        app: 'PUBLIC:ExpenseTracker/Native/iOS/InvoiceApp1.0.ipa',
-
-        // 5. Set the unique identifier of your app
-        bundleId: 'io.perfecto.expense.tracker',
-        appiumVersion: '1.20.2',
-        autoLaunch: true, // Whether to have Appium install and launch the app automatically.
-        iOSResign: true, // To work with hybrid applications, install the iOS/Android application as instrumented.
-        // fullReset: false, // Reset app state by uninstalling app
+        'perfecto:options': {
+            securityToken: securityToken,
+            automationName: 'Appium',
+            platformName: 'iOS',
+            platformVersion: '17.3.1',
+            model: 'iPhone-11',
+            app: 'PUBLIC:InvoiceApp1.0.ipa',
+            bundleId: 'io.perfecto.expense.tracker',
+            autoLaunch: true, 
+            iOSResign: true, 
+            takesScreenshot: false,
+            screenshotOnError: true,
+            openDeviceTimeout: 5
+        },
         browserName: '',
-        takesScreenshot: false,
-        screenshotOnError: true,
-        openDeviceTimeout: 5
     }, ],
     // Default timeout for all waitFor* commands.
     waitforTimeout: 30000,
